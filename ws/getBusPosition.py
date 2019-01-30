@@ -15,6 +15,8 @@ soup = BeautifulSoup(html.data, "html.parser")
 
 plots = soup.find_all("li", id=re.compile("plot"))
 
+print(plots.pop(0).find_all("div", class_="courseName"))
+
 for plot in plots:
   try:
     plotsoup = BeautifulSoup(plot, "html.parser")
