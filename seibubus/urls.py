@@ -15,7 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import url, include
+
+from ws.urls import router as ws_router
+from ws import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    url(r'^api/', include(ws_router.urls)),
+    path('busapi/', include('ws.urls')),  # ここを追加
 ]
