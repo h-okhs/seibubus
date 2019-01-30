@@ -47,13 +47,19 @@ def busstatus_list(request):
         departureAt = ''
         for courseName in courseNames:
             courseName = re.sub(r'(＜|＞)', '', courseName.string)
+        if (len(courseName) == 0):
+            continue
         departureTimes = plot.find_all(
             "div", text=re.compile(u"発車まで"))
         for departureTime in departureTimes:
             departureAt = re.sub(r'(\n|\t)', '', departureTime.string)
+        if (len(departureAt) == 0):
+            continue
         busstatus_dict = OrderedDict([
-            ('line', courseName),
-            ('departureAt', departureAt)
+            #            ('line', courseName),
+            #            ('departureAt', departureAt)
+            ('line', '荻１４'),
+            ('departureAt', '発車まで:約3分')
         ])
         busstatuses.append(busstatus_dict)
 
