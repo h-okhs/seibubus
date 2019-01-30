@@ -1,5 +1,5 @@
 """
-WSGI config for seibubus2 project.
+WSGI config for seibubus project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'seibubus2.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'seibubus.settings')
 
 application = get_wsgi_application()
