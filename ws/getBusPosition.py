@@ -13,10 +13,12 @@ soup = BeautifulSoup(res.content, "lxml")
 plots = soup.select("ul#resultList li")
 
 for plot in plots:
-  print(plot)
-#  courseName = plot.find_all("div", class_="courseName").pop(0).replace('＜', '').replace('＞', '')
+#  print(plot.encode('utf-8'))
+  courseNames = plot.find_all("div", class_="courseName")
+  for courseName in courseNames:
+    print(courseName.encode('utf-8'))
 #  departuretime = plot.find_all("div", text=re.compile("発車まで")).pop(0).replace(' ', '')
 
-#  print(courseName)
+
 #  print(departuretime)
 
