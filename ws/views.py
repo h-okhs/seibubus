@@ -56,12 +56,15 @@ def busstatus_list(request):
         if (len(departureAt) == 0):
             continue
         busstatus_dict = OrderedDict([
-            #            ('line', courseName),
-            #            ('departureAt', departureAt)
-            ('line', '荻１４'),
-            ('departureAt', '発車まで:約3分')
+            ('line', courseName),
+            ('departureAt', departureAt)
         ])
         busstatuses.append(busstatus_dict)
 
+    busstatus_dict = OrderedDict([
+        ('line', '荻１４'),
+        ('departureAt', '発車まで:約3分')
+    ])
+    busstatuses.append(busstatus_dict)
     data = OrderedDict([('busstatuses', busstatuses)])
     return render_json_response(request, data)
