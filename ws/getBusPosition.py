@@ -17,8 +17,7 @@ for plot in plots:
   courseNames = plot.find_all("div", class_="courseName")
   for courseName in courseNames:
     print(courseName.encode('utf-8'))
-#  departuretime = plot.find_all("div", text=re.compile("発車まで")).pop(0).replace(' ', '')
-
-
-#  print(departuretime)
+  departureTimes = plot.find_all("div", text=re.compile("発車まで")).pop(0).replace(' ', '')
+  for departureTime in departureTimes:
+    print(departureTime.encode('utf-8'))
 
