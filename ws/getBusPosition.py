@@ -3,14 +3,11 @@ import urllib3
 import re
 from bs4 import BeautifulSoup
 
-# アクセスするURL
 url = "http://transfer.navitime.biz/seibubus-dia/pc/location/BusLocationResult?startId=00110168&goalId=00110123"
 
-# URLにアクセスする htmlが帰ってくる → <html><head><title>経済、株価、ビジネス、政治のニュース:日経電子版</title></head><body....
 http = urllib3.PoolManager()
 html = http.request('GET', url)
 
-# htmlをBeautifulSoupで扱う
 soup = BeautifulSoup(html.data, "html.parser")
 
 plots = soup.find_all("li", id=re.compile("plot"))
