@@ -1,5 +1,5 @@
 # coding: UTF-8
-import urllib2
+import urllib3
 import re
 from bs4 import BeautifulSoup
 
@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 url = "http://transfer.navitime.biz/seibubus-dia/pc/location/BusLocationResult?startId=00110168&goalId=00110123"
 
 # URLにアクセスする htmlが帰ってくる → <html><head><title>経済、株価、ビジネス、政治のニュース:日経電子版</title></head><body....
-html = urllib2.urlopen(url)
+html = urllib3.urlopen(url)
 
 # htmlをBeautifulSoupで扱う
 soup = BeautifulSoup(html, "html.parser")
