@@ -20,8 +20,8 @@ for plot in plots:
     courseName = plotsoup.find_all("div", class_="courseName").pop(0).replace('＜', '').replace('＞', '')
     departuretime = plotsoup.find_all("div", text=re.compile("発車まで")).pop(0).replace(' ', '')
 
-    print courseName
-    print departuretime
+    print(courseName)
+    print(departuretime)
   except:
     pass
 
