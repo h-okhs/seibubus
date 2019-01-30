@@ -11,13 +11,11 @@ res = requests.get(url, headers=headers)
 soup = BeautifulSoup(res.content, "lxml")
 
 plots = soup.select("ul#resultList li")
-print(plots)
 
 for plot in plots:
   try:
-    plotsoup = BeautifulSoup(plot, "lxml")
-    courseName = plotsoup.find_all("div", class_="courseName").pop(0).replace('＜', '').replace('＞', '')
-    departuretime = plotsoup.find_all("div", text=re.compile("発車まで")).pop(0).replace(' ', '')
+    courseName = plot.find_all("div", class_="courseName").pop(0).replace('＜', '').replace('＞', '')
+    departuretime = plot.find_all("div", text=re.compile("発車まで")).pop(0).replace(' ', '')
 
     print(courseName)
     print(departuretime)
