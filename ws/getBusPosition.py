@@ -1,16 +1,19 @@
 # coding: UTF-8
-import urllib3
+import requests
 import re
 from bs4 import BeautifulSoup
 
 url = "http://transfer.navitime.biz/seibubus-dia/pc/location/BusLocationResult?startId=00110168&goalId=00110123"
 
-http = urllib3.PoolManager()
-html = http.request('GET', url)
+headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36"}
+res = requests.get(url, timeout=1, headers=headers)
 
-soup = BeautifulSoup(html.data, "html.parser")
+print(res.text)
+print(res.content)
 
-plots = soup.find_all("li", id=re.compile("plot"))
+soup = BeautifulSoup(res.content, "html.parser")
+
+plots = soup.select("ul#resultList li")
 
 print(plots.pop(0).find_all("div", class_="courseName"))
 
