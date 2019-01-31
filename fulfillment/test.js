@@ -15,11 +15,12 @@ http.get(URL, (res) => {
 
   res.on('end', (res) => {
     res = JSON.parse(body);
+    console.log(res);
 
     let busstatusArray = res.busstatuses;
     let message = '';
     busstatusArray.forEach(element => {
-      message += element.line + ' ' + element.departureAt + ' ';
+      message += element.line + ' ' + element.departureAt + ':';
     });
     console.log(message);
   });

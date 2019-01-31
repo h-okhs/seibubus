@@ -59,7 +59,7 @@ def busstatus_list(request):
         if (len(departureAt) == 0):
             continue
 
-        message += courseName + ' ' + departureAt + ' '
+        message += courseName + ' ' + departureAt + ':'
 
         busstatus_dict = OrderedDict([
             ('line', courseName),
