@@ -43,6 +43,7 @@ def busstatus_list(request):
     res = requests.get(url, headers=headers)
     soup = BeautifulSoup(res.content, "lxml")
     plots = soup.select("ul#resultList li")
+    message = ''
     for plot in plots:
         courseNames = plot.find_all("div", class_="courseName")
         courseName = ''
@@ -57,11 +58,15 @@ def busstatus_list(request):
             departureAt = re.sub(r'(\n|\t)', '', departureTime.string)
         if (len(departureAt) == 0):
             continue
+
+        message += courseName + ' ' + departureAt + ' '
+
         busstatus_dict = OrderedDict([
             ('line', courseName),
             ('departureAt', departureAt)
         ])
         busstatuses.append(busstatus_dict)
 
-    data = OrderedDict([('busstatuses', busstatuses)])
+#    data = OrderedDict([('busstatuses', busstatuses)])
+    data = OrderedDict([('fulfillmentText', message)])
     return render_json_response(request, data)
