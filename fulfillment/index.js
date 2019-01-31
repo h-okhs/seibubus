@@ -19,7 +19,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
 
   function getBusPositionHandler(agent) {
     let http = require('http');
-    const URL = 'http://qiita.com/kazuhikoyamashita/items/273692ccbdf8c0950a71.json';
+    const URL = 'https://lighteater.com/ws/index.cgi/busapi/v1/busstatuses';
 
     http.get(URL, (res) => {
       let body = '';
@@ -32,11 +32,17 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
       res.on('end', (res) => {
         res = JSON.parse(body);
         console.log(res);
+
+        let busstatusArray = res.busstatuses;
+        let message = '';
+        busstatusArray.forEach(element => {
+          message += element.line. + ' ' + element.departureAt + ' ';
+        });
+        agent.add(message);
       });
     }).on('error', (e) => {
       console.log(e.message); //エラー時
     });
-    agent.add(`This message is from Dialogflow's Cloud Functions for Firebase editor!`);
   }
 
   // Run the proper function handler based on the matched Dialogflow intent name
