@@ -1,3 +1,4 @@
+from django.views.decorators.csrf import csrf_protect
 import requests
 from bs4 import BeautifulSoup
 import json
@@ -32,6 +33,7 @@ def render_json_response(request, data, status=None):
     return response
 
 
+@csrf_protect
 def busstatus_list(request):
     """書籍と感想のJSONを返す"""
     busstatuses = []

@@ -6,6 +6,10 @@ const functions = require('firebase-functions');
 const {
   WebhookClient
 } = require('dialogflow-fulfillment');
+const {
+  Card,
+  Suggestion
+} = require('dialogflow-fulfillment');
 
 process.env.DEBUG = 'dialogflow:debug'; // enables lib debugging statements
 
@@ -14,11 +18,11 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
     request,
     response
   });
-  // console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
-  // console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
+  console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
+  console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
 
   function getBusPositionHandler(agent) {
-    let http = require('http');
+    let http = require('https');
     const URL = 'https://lighteater.com/ws/index.cgi/busapi/v1/busstatuses';
 
     http.get(URL, (res) => {
@@ -31,12 +35,10 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
 
       res.on('end', (res) => {
         res = JSON.parse(body);
-        console.log(res);
 
-        let busstatusArray = res.busstatuses;
         let message = '';
-        busstatusArray.forEach(element => {
-          message += element.line. + ' ' + element.departureAt + ' ';
+        res.busstatuses.forEach(element => {
+          message += element.line + ' ' + element.departureAt + ' ';
         });
         agent.add(message);
       });
