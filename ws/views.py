@@ -61,10 +61,5 @@ def busstatus_list(request):
         ])
         busstatuses.append(busstatus_dict)
 
-    busstatus_dict = OrderedDict([
-        ('line', '荻１４'),
-        ('departureAt', '発車まで:約3分')
-    ])
-    busstatuses.append(busstatus_dict)
     data = OrderedDict([('busstatuses', busstatuses)])
     return render_json_response(request, data)
