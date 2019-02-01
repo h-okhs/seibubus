@@ -70,4 +70,4 @@ def busstatus_list(request):
 #    data = OrderedDict([('busstatuses', busstatuses)])
     if (message == ''):
         message = '30分以内に発車するバスはありません。'
-    return render_json_response(request, {'fullfillmentText', message)
+    return render_json_response(request, {'fullfillmentText', message})
