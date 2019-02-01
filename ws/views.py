@@ -61,12 +61,13 @@ def busstatus_list(request):
 
         message += courseName + ' ' + departureAt + ':'
 
-        busstatus_dict = OrderedDict([
-            ('line', courseName),
-            ('departureAt', departureAt)
-        ])
-        busstatuses.append(busstatus_dict)
+        # busstatus_dict = OrderedDict([
+        #     ('line', courseName),
+        #     ('departureAt', departureAt)
+        # ])
+        # busstatuses.append(busstatus_dict)
 
 #    data = OrderedDict([('busstatuses', busstatuses)])
-    data = OrderedDict([('fulfillmentText', message)])
-    return render_json_response(request, data)
+    if (message == ''):
+        message = '30分以内に発車するバスはありません。'
+    return render_json_response(request, {'fullfillmentText', message)
