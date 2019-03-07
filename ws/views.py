@@ -35,7 +35,7 @@ def render_json_response(request, data, status=None):
 
 @csrf_exempt
 def busstatus_list(request):
-    """書籍と感想のJSONを返す"""
+    busStopName = ['井草中学校', '上井草駅',]
     busstatuses = []
     url = "http://transfer.navitime.biz/seibubus-dia/pc/location/BusLocationResult?startId=00110168&goalId=00110123"
     headers = {
@@ -52,6 +52,7 @@ def busstatus_list(request):
             courseName = re.sub(r'(＜|＞)', '', courseName.string)
         if (len(courseName) == 0):
             continue
+
         departureTimes = plot.find_all(
             "div", text=re.compile(u"発車まで"))
         for departureTime in departureTimes:
